@@ -15,11 +15,12 @@ This is the beginning of the project
 
 ## Future plans
 
-The current algorithm is expected to be extended for exitement modelling of various categories of videos (like movies, sitcoms etc.) 
+The current algorithm is expected to be extended for exitement modelling of various categories of videos (like movies, sitcoms etc.).
 
 ### Note
 
 This is a GSoC 2017 project under [**CCExtractor organisation**](http://ccextractor.org/).
+Mentor - [Zulko](https://github.com/Zulko)
 
 
 
