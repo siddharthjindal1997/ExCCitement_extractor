@@ -11,6 +11,7 @@ Blog Posts - [GSoC blog](http://www.medium.com/@siddharthjindal)
 ### First release : v0.1
 
 Excitement_extractor is a Python based software which uses the method called excitement modelling to automatically extract highlights of a Sports match.
+
 It models a video input into a Excitement vs time curve, which is then be used for to extract automatic highlights. The graph shows the change in the excitement trend of the video with peaks-and-lows marking interesting-and-boring moments af the match and then uses this graph to generate automatic highlights. 
 
 
@@ -49,6 +50,7 @@ It models a video input into a Excitement vs time curve, which is then be used f
 
 The project proposal is completed. The first version (v0.1) of the software is ready to be used. 
 The software works quite well for soccer matches. It takes around 15min extraction time for a 90 min long match. It has been tested on several soccer matches and works quite well. 
+
 Apart from just goals, the software is able to include in highlights some very crucial moments of a match like any big foul, close attempt towards goal or any event which might be exciting to watch for audience.
 
 Other than soccer the software might work well on other sports like Rugby/Hockey to atleast generate the Excitement trend of the game.
@@ -60,7 +62,7 @@ The GUI is still in its early phases. It allows user to load a file, generate gr
 
 ## Known issues 
 
-*Progress bar not shown
+* Progress bar not shown
 
 ## To-Do (Immediate work)
 
