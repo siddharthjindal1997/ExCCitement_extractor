@@ -1,6 +1,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from gui import Ui_MainWindow
+#from main_gui import MyMainGui
 import moviepy.editor
 import numpy as np
 import matplotlib.pyplot as plt
@@ -74,6 +74,8 @@ class excitement_extract():
         # reading a sports video at a low resolution
         self.clip = moviepy.editor.VideoFileClip(filename,
                                                  target_resolution=(100, None))
+        #clipduration = self.clip.duration
+        self.activecheck= True
         self.luminosities = list()
         self.threshold = 10.0
         self.progress_bar = False
@@ -82,7 +84,12 @@ class excitement_extract():
         self.cut_density_list = list()
         self.sound_list = list()
         self.excite_curve = list()
+
         print 'file read :' + filename
+
+    def get_totalframes(self):
+        #used for progress bar
+        return int(self.fps*self.clip.duration)
 
     def next_cut(self, f_time, cuts_frame_time):
         """ For a frame, it gets the time (in secs) 
@@ -108,8 +115,13 @@ class excitement_extract():
         """
         last_fr = None
         for f in self.clip.iter_frames(fps=self.fps,
-                        dtype='uint32', progress_bar=False):
+                        dtype='uint32', progress_bar=True):
             
+            if(self.activecheck == False):
+                return 1
+            
+            qApp.processEvents()
+
             self.luminosities.append(f.sum())
             
             # Analysing average movement
@@ -119,6 +131,7 @@ class excitement_extract():
                 del(fr_diff)
                 del last_fr
             last_fr = f.copy()
+
 
         # Detecting cuts in the video
         self.luminosities = np.array(self.luminosities, dtype=float)
@@ -236,6 +249,7 @@ class excitement_extract():
                 motion_scaled_smooth[k] * sound_scaled_smooth[k]
                 for k in range(0, len(self.cut_density_list))]
         
+        self.excite_curve= excitement_extract.scale_curve(self,np.asarray(self.excite_curve))
         return self.excite_curve
 
     def get_final_highlights_time(self, smooth_curve):
@@ -263,4 +277,9 @@ class excitement_extract():
                     final_peaks_position[-1] = fr_num
             else:
                 final_peaks_position.append(fr_num)
-        return final_peaks_position
+
+        final_times= [ int(frame_no/self.fps ) for frame_no in final_peaks_position]
+        return final_times
+
+    def stop_process(self):
+        self.activecheck = False

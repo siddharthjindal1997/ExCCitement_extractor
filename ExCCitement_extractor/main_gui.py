@@ -16,13 +16,19 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.filename = None
 
+        #self.activecheck=True
+
         self.butLoadFile.clicked.connect(self.load_file)
         self.actionLoad.triggered.connect(self.load_file)
 
         self.butGenGraph.clicked.connect(self.process_manager)
 
         
+
+
+
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
+
         #sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
 
         self.buExit.clicked.connect(self.exit_gui)
@@ -32,13 +38,17 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
 
+    
+
     def normalOutputWritten(self, text):
         # Append text to the QTextEdit widget.
+        #self.textandstuff.append(text)
         cursor = self.textandstuff.textCursor()
         cursor.movePosition(QTextCursor.End)
         cursor.insertText(text)
         self.textandstuff.setTextCursor(cursor)
         self.textandstuff.ensureCursorVisible()
+        #QApplication.processEvents()
 
     def load_file(self):
         # Load a video file from directory.
@@ -71,7 +81,14 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         """
         self.isGraphgenerated = True
         game_clip = excitement_extract(str(self.filename))
-        game_clip.process_frames()
+        self.butCancel.clicked.connect(game_clip.stop_process)
+        print "The algorithm is running, please be patient..."
+        print "It might take some time."
+        check_complete = game_clip.process_frames()
+        if check_complete==1:
+            print "Process stopped in the middle by user."
+            print "====================================="
+            return
         highlight_list = game_clip.process_highlights()
         excitement_curve = game_clip.get_excite_curve()
         my_gui.sec_to_hms(highlight_list)
@@ -82,6 +99,15 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         ScaledPixmap = pixmap.scaled(self.label.size())
         self.label.setPixmap(ScaledPixmap)
         self.label.show()
+        print 
+        
+        final = moviepy.editor.concatenate([game_clip.clip.subclip(max(t-10,0),min(t+5, game_clip.clip.duration))
+                     for t in highlight_list])
+        final.to_videofile(str(self.filename) + 'folder/summary.mp4')
+
+        print "Extraction completed!"
+        print "==================================="
+
 
     def createfolder(self):
         """ Creates a new folder for each new file being
@@ -128,6 +154,11 @@ class EmittingStream(QObject):
 
     def write(self, text):
         self.textWritten.emit(str(text))
+
+    def flush(self):
+        print ' '
+
+
 
 
 

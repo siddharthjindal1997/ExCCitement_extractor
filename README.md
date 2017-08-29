@@ -14,6 +14,20 @@ Excitement_extractor is a Python based software which uses the method called exc
 
 It models a video input into a Excitement vs time curve, which is then be used for to extract automatic highlights. The graph shows the change in the excitement trend of the video with peaks-and-lows marking interesting-and-boring moments af the match and then uses this graph to generate automatic highlights. 
 
+## Current Status 
+
+The project proposal is completed. The first version (v0.1) of the software is ready to be used. 
+The software works quite well for soccer matches. It takes around 15min extraction time for a 90 min long match. It has been tested on several soccer matches and works quite well. 
+
+Apart from just goals, the software is able to include in highlights some very crucial moments of a match like any big foul, close attempt towards goal or any event which might be exciting to watch for audience.
+
+Other than soccer the software might work well on other sports like Rugby/Hockey to atleast generate the Excitement trend of the game.
+
+The software has its own GUI built in Qt. Thus it's a cross platform software without requirement of command line. 
+The GUI is still in its early phases. It allows user to load a file, generate graph and extract highlights to an MP4 video.
+
+
+
 
 #### Dependencies:
 * [Python 2.7.X]
@@ -22,6 +36,16 @@ It models a video input into a Excitement vs time curve, which is then be used f
 * [pandas]
 
 ## Download & Installation
+
+1. Download the tar file from [releases]()
+
+2. Unzip it.
+
+3. Download dependencies 
+
+4. cd to ExCCitement_extractor folder and run `python main_gui.py` from terminal.
+
+## Installing dependencies
 
 ### Using conda (recommended)
 
@@ -44,19 +68,18 @@ It models a video input into a Excitement vs time curve, which is then be used f
 	* PyQt4 installation
 	` conda install -c menpo pyqt `
 
+### Manual installation
 
+1. python version 2.7 install (if does not exsist)
 
-## Current Status 
+2. Download moviepy through pip.
+` (sudo) pip install moviepy
 
-The project proposal is completed. The first version (v0.1) of the software is ready to be used. 
-The software works quite well for soccer matches. It takes around 15min extraction time for a 90 min long match. It has been tested on several soccer matches and works quite well. 
+3. Download matplotlib
 
-Apart from just goals, the software is able to include in highlights some very crucial moments of a match like any big foul, close attempt towards goal or any event which might be exciting to watch for audience.
+4. download pyqt4
+` sudo apt-get install python-qt4 `
 
-Other than soccer the software might work well on other sports like Rugby/Hockey to atleast generate the Excitement trend of the game.
-
-The software has its own GUI built in Qt. Thus it's a cross platform software without requirement of command line. 
-The GUI is still in its early phases. It allows user to load a file, generate graph and extract highlights to an MP4 video.
 
 
 

@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
+    <width>600</width>
     <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ExCCitement Extractor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTextEdit" name="textandstuff">
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>460</y>
-      <width>621</width>
+      <width>581</width>
       <height>101</height>
      </rect>
     </property>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="butCancel">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>380</x>
       <y>570</y>
       <width>97</width>
       <height>27</height>
@@ -45,7 +45,7 @@
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>621</width>
+      <width>581</width>
       <height>401</height>
      </rect>
     </property>
@@ -54,13 +54,6 @@
       <widget class="QPushButton" name="butGenGraph">
        <property name="text">
         <string>Generate excitement graph and Extract highlights</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QProgressBar" name="progressBar">
-       <property name="value">
-        <number>24</number>
        </property>
       </widget>
      </item>
@@ -91,7 +84,7 @@
    <widget class="QPushButton" name="butLoadFile">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>160</x>
       <y>10</y>
       <width>241</width>
       <height>27</height>
@@ -104,7 +97,7 @@
    <widget class="QPushButton" name="buExit">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>490</x>
       <y>570</y>
       <width>97</width>
       <height>27</height>
@@ -120,7 +113,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>636</width>
+     <width>600</width>
      <height>25</height>
     </rect>
    </property>
@@ -131,13 +124,7 @@
     <addaction name="actionLoad"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuView">
-    <property name="title">
-     <string>View</string>
-    </property>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuView"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionLoad">
