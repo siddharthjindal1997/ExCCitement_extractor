@@ -26,6 +26,10 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(600, 651)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/gui_logo.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/icon/gui_logo.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.textandstuff = QtGui.QTextEdit(self.centralwidget)
@@ -89,6 +93,7 @@ class Ui_MainWindow(object):
         self.actionLoad.setText(_translate("MainWindow", "Load", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
 
+import resources_rc
 
 if __name__ == "__main__":
     import sys

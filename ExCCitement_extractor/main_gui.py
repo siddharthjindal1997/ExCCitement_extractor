@@ -5,6 +5,7 @@ from excitement_algo import excitement_extract
 import moviepy.editor
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import text
 import math
 import sys
 import os
@@ -16,20 +17,12 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.filename = None
 
-        #self.activecheck=True
-
         self.butLoadFile.clicked.connect(self.load_file)
         self.actionLoad.triggered.connect(self.load_file)
 
         self.butGenGraph.clicked.connect(self.process_manager)
 
-        
-
-
-
         sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
-
-        #sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
 
         self.buExit.clicked.connect(self.exit_gui)
         self.actionExit.triggered.connect(self.exit_gui)
@@ -42,13 +35,11 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
 
     def normalOutputWritten(self, text):
         # Append text to the QTextEdit widget.
-        #self.textandstuff.append(text)
         cursor = self.textandstuff.textCursor()
         cursor.movePosition(QTextCursor.End)
         cursor.insertText(text)
         self.textandstuff.setTextCursor(cursor)
         self.textandstuff.ensureCursorVisible()
-        #QApplication.processEvents()
 
     def load_file(self):
         # Load a video file from directory.
@@ -91,15 +82,23 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
             return
         highlight_list = game_clip.process_highlights()
         excitement_curve = game_clip.get_excite_curve()
+        
         my_gui.sec_to_hms(highlight_list)
+
+        #matplot lib operations
         plt.plot(excitement_curve)
+        plt.xlabel('Frame number')
+        plt.ylabel('excitement level (in %)')
+        for xpos in highlight_list:
+    		plt.axvline(x=xpos, color='r')
+    		text( xpos, 50 ,"highlight",rotation=90, verticalalignment='center')
+
         my_gui.createfolder()
         plt.savefig(str(self.filename) + 'folder/testplot.png')
         pixmap = QPixmap(str(self.filename) + 'folder/testplot.png')
         ScaledPixmap = pixmap.scaled(self.label.size())
         self.label.setPixmap(ScaledPixmap)
-        self.label.show()
-        print 
+        self.label.show() 
         
         final = moviepy.editor.concatenate([game_clip.clip.subclip(max(t-10,0),min(t+5, game_clip.clip.duration))
                      for t in highlight_list])

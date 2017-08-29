@@ -13,6 +13,11 @@
   <property name="windowTitle">
    <string>ExCCitement Extractor</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/gui_logo.png</normaloff>
+    <normalon>:/icon/gui_logo.png</normalon>:/gui_logo.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTextEdit" name="textandstuff">
     <property name="geometry">
@@ -138,6 +143,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
