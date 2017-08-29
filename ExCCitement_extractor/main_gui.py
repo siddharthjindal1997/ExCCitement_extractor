@@ -90,8 +90,8 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         plt.xlabel('Frame number')
         plt.ylabel('excitement level (in %)')
         for xpos in highlight_list:
-    		plt.axvline(x=xpos, color='r')
-    		text( xpos, 50 ,"highlight",rotation=90, verticalalignment='center')
+    		plt.axvline(x=game_clip.fps*xpos, color='r')
+    		text( game_clip.fps*xpos, 50 ,"highlight",rotation=90, verticalalignment='center')
 
         my_gui.createfolder()
         plt.savefig(str(self.filename) + 'folder/testplot.png')
@@ -99,10 +99,10 @@ class MyMainGui(QMainWindow, Ui_MainWindow):
         ScaledPixmap = pixmap.scaled(self.label.size())
         self.label.setPixmap(ScaledPixmap)
         self.label.show() 
-        
-        final = moviepy.editor.concatenate([game_clip.clip.subclip(max(t-10,0),min(t+5, game_clip.clip.duration))
+
+        final = moviepy.editor.concatenate([game_clip.clip.subclip(max(t-20,0),min(t-5, game_clip.clip.duration))
                      for t in highlight_list])
-        final.to_videofile(str(self.filename) + 'folder/summary.mp4')
+        final.write_videofile(str(self.filename) + 'folder/summary.mp4')
 
         print "Extraction completed!"
         print "==================================="

@@ -73,7 +73,7 @@ class excitement_extract():
     def __init__(self, filename):
         # reading a sports video at a low resolution
         self.clip = moviepy.editor.VideoFileClip(filename,
-                                                 target_resolution=(100, None))
+                                                 target_resolution=(240, None))
         #clipduration = self.clip.duration
         self.activecheck= True
         self.luminosities = list()
